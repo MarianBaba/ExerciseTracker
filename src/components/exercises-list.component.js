@@ -3,7 +3,7 @@ import axios from 'axios';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableHead from '@material-ui/core/TableHead';
-import { Container, Paper, Typography } from "@material-ui/core";
+import { Container, Grow, Paper, Typography } from "@material-ui/core";
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
@@ -73,6 +73,7 @@ class ExercisesList extends Component {
   render() {
     const { classes } = this.props;
     return (
+      <Grow in>
       <Container className={classes.container}>
         <Paper className={classes.paper}>
         <Typography variant="h4" className={classes.text}>Logged Exercises</Typography>
@@ -82,7 +83,7 @@ class ExercisesList extends Component {
           <TableRow className={classes.tableRow}>
               <TableCell className={classes.tableCell}>Username</TableCell>
               <TableCell className={classes.tableCell}>Description</TableCell>
-              <TableCell className={classes.tableCell}>Duration/Date</TableCell>
+              <TableCell className={classes.tableCell}>Duration / Date</TableCell>
               <TableCell className={classes.tableCell}>Actions</TableCell>
               </TableRow>
             </TableHead>   
@@ -92,7 +93,8 @@ class ExercisesList extends Component {
           </Table>
           </TableContainer>
         </Paper>
-      </Container>
+        </Container>
+      </Grow>
     )
   }
 }

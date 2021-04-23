@@ -2,8 +2,46 @@ import React, { Component } from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
+import { Container, Grow, Paper, Typography } from '@material-ui/core';
+import { withStyles } from "@material-ui/core/styles";
 
-export default class CreateExercise extends Component {
+const styles = theme => ({
+    container: {
+      textAlign:"center",
+      padding:10,
+    },
+    paper: {
+      padding:20, 
+      backgroundColor:"rgb(200,200,200)",
+      
+    },
+    text: {
+      fontFamily: "Jura", 
+      marginBottom:20, 
+      fontWeight: "bold"
+    },
+    labels: {
+        fontSize: 20,
+        marginRight: 20,
+        
+    },
+    inputContainer: {
+        margin: 10,
+    },
+    submit: {
+        border: "none",
+        fontSize: 18,
+        padding: 10,
+        borderRadius: 5,
+        backgroundColor:"rgb(60,60,60)",
+        color:"orange",
+        "&:hover": {
+            boxShadow: "0px 0px 5px black"
+        }
+    }
+  })
+
+class CreateExercise extends Component {
 
     constructor(props) {
         super(props);
@@ -76,13 +114,18 @@ export default class CreateExercise extends Component {
 
 
     render() {
+        const { classes } = this.props;
         return (
-            <div>
-                <h3>Create New Exercise Log</h3>
+            <Grow in>
+            <Container className={classes.container}>
+                <Paper className={classes.paper}>
+                <Typography className={classes.text} variant="h4">Create New Exercise Log</Typography>
                 <form onSubmit={this.onSubmit}>
-                    <div>
-                        <label>Username: </label>
-                        <select ref="userInput"
+                    <Container className={classes.inputContainer}>
+                        <label className={classes.labels}>Username: </label>
+                        <select
+                            className="form-control"
+                            ref="userInput"
                             required
                             value={this.state.username}
                             onChange={this.onChangeUsername}>
@@ -96,43 +139,52 @@ export default class CreateExercise extends Component {
                                     })
                                 }
                             </select>
-                    </div>
-                    <div>
-                        <label>
+                    </Container>
+                    <Container className={classes.inputContainer}>
+                        <label className={classes.labels}>
                             Description: 
                         </label>
                         <input
+                            className="form-control"
                             type="text"
                             required
                             value={this.state.description}
                             onChange={this.onChangeDescription}
                              />
-                    </div>
-                    <div>
-                        <label>
+                    </Container>
+                    <Container className={classes.inputContainer}>
+                        <label className={classes.labels}>
                             Duration (in minutes): 
                         </label>
                         <input
+                            className="form-control"
                             type="text"
                             value={this.state.duration}
                             onChange={this.onChangeDuration}
                             />
-                    </div>
-                    <div>
-                        <label>Date: </label>
-                        <div>
+                    </Container>
+                    <Container className={classes.inputContainer}>
+                        <label className={classes.labels}>Date: </label>
+                        
                             <DatePicker
+                                className="form-control"
                                 selected={this.state.date}
                                 onChange={this.onChangeDate}
                             />
-                        </div>
-                    </div>
-                    <div>
-                        <input type="submit" value="create exercise log" />
-                    </div>
+                        
+                    </Container>
+                    <Container className={classes.inputContainer}>
+                        
+                        <input className={classes.submit} type="submit" value="Create Exercise" />
+                        
+                    </Container>
 
                 </form>
-            </div>
+                </Paper>
+            </Container>
+            </Grow>
         )
     }
 }
+
+export default withStyles(styles)(CreateExercise);

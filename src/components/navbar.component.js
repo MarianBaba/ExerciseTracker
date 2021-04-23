@@ -3,6 +3,7 @@ import { Button, Grid } from "@material-ui/core";
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import img from "../images/unnamed.png";
+import img2 from "../images/cc.png";
 import { withStyles } from "@material-ui/core/styles";
 
 const styles = theme => ({
@@ -67,7 +68,7 @@ class Navbar extends Component {
                             </Link>    
                         </Grid>
                         <Grid item xs={12} sm={4}>
-                            <img src="https://i.dlpng.com/static/png/6489567_preview.png" height="135px"></img>
+                            <img src={img2} height="135px"></img>
                         </Grid>
                     </Grid>               
                     <Grid container className={classes.container}>
