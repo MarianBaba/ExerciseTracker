@@ -1,5 +1,5 @@
 
-import { Button, Container, Grid, Paper, Typography } from "@material-ui/core";
+import { Button, Grid } from "@material-ui/core";
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import img from "../images/unnamed.png";
@@ -61,7 +61,7 @@ class Navbar extends Component {
                         <Grid item xs={12} sm={4}>
                             <img src={img} height="120px"></img>
                         </Grid>
-                        <Grid item xs={12} sm={4}>
+                        <Grid item xs={12} sm={12} md={4}>
                             <Link className={classes.headLink} to="/">
                                 ExercTracker
                             </Link>    

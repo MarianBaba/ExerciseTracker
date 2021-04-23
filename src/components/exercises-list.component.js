@@ -1,20 +1,42 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableHead from '@material-ui/core/TableHead';
+import { Container, Paper, Typography } from "@material-ui/core";
+import TableRow from '@material-ui/core/TableRow';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import { withStyles } from "@material-ui/core/styles";
+import Exercise from "./exercise";
 
-const Exercise = props => (
-  <tr>
-    <td>{props.exercise.username}</td>
-    <td>{props.exercise.description}</td>
-    <td>{props.exercise.duration}</td>
-    <td>{props.exercise.date.substring(0,10)}</td>
-    <td>
-      <Link to={"/edit/"+props.exercise._id}>edit</Link> | <a href="#" onClick={() => { props.deleteExercise(props.exercise._id) }}>delete</a>
-    </td>
-  </tr>
-)
+const styles = theme => ({
+  container: {
+    textAlign:"center",
+    padding:10
+  },
+  paper: {
+    padding:20, 
+    backgroundColor:"rgb(200,200,200)",
+  },
+  text: {
+    fontFamily: "Jura", 
+    marginBottom:20, 
+    fontWeight: "bold"
+  },
+  mainTable: {
+    textAlign:"center"
+  },
+  tableRow: {
+    backgroundColor:"rgb(40,40,40)"
+  },
+  tableCell: {
+    color:"white"
+  },
+})
 
-export default class ExercisesList extends Component {
+
+class ExercisesList extends Component {
   constructor(props) {
     super(props);
 
@@ -49,24 +71,30 @@ export default class ExercisesList extends Component {
   }
 
   render() {
+    const { classes } = this.props;
     return (
-      <div>
-        <h3>Logged Exercises</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Username</th>
-              <th>Description</th>
-              <th>Duration</th>
-              <th>Date</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
+      <Container className={classes.container}>
+        <Paper className={classes.paper}>
+        <Typography variant="h4" className={classes.text}>Logged Exercises</Typography>
+        <TableContainer>
+        <Table className={classes.mainTable}>
+          <TableHead>            
+          <TableRow className={classes.tableRow}>
+              <TableCell className={classes.tableCell}>Username</TableCell>
+              <TableCell className={classes.tableCell}>Description</TableCell>
+              <TableCell className={classes.tableCell}>Duration/Date</TableCell>
+              <TableCell className={classes.tableCell}>Actions</TableCell>
+              </TableRow>
+            </TableHead>   
+          <TableBody>
             { this.exerciseList() }
-          </tbody>
-        </table>
-      </div>
+            </TableBody>
+          </Table>
+          </TableContainer>
+        </Paper>
+      </Container>
     )
   }
 }
+
+export default withStyles(styles)(ExercisesList);
